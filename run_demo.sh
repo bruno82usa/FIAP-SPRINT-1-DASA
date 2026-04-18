@@ -10,7 +10,20 @@ lsof -ti:8787 | xargs kill -9 2>/dev/null || true
 
 # Iniciar API
 echo "📡 Iniciando API na porta 8789..."
-nohup .venv/bin/uvicorn src.api.main:app --host 0.0.0.0 --port 8789 > api_demo.log 2>&1 &
+
+# Verificar se ambiente virtual existe
+if [ -f ".venv/bin/uvicorn" ]; then
+    UVICORN_CMD=".venv/bin/uvicorn"
+    echo "   Usando ambiente virtual (.venv)"
+elif command -v uvicorn > /dev/null 2>&1; then
+    UVICORN_CMD="uvicorn"
+    echo "   Usando uvicorn global"
+else
+    echo "❌ uvicorn não encontrado. Instale com: pip install uvicorn fastapi"
+    exit 1
+fi
+
+nohup $UVICORN_CMD src.api.main:app --host 0.0.0.0 --port 8789 > api_demo.log 2>&1 &
 API_PID=$!
 echo $API_PID > api_demo.pid
 
