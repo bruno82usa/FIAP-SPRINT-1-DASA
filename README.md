@@ -218,8 +218,8 @@ curl -X POST http://localhost:8789/ask \
 
 ## 🎥 Apresentação em Vídeo
 
-[Link para vídeo explicativo - a ser adicionado]
-
+[[Link para vídeo explicativo - a ser adicionado]
+](https://youtu.be/iUiRu2i6Yxw)
 ---
 
 **Time:** Bruno Gambarini RM561517
