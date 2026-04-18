@@ -222,7 +222,7 @@ curl -X POST http://localhost:8789/ask \
 
 ---
 
-**Time:** [Nomes dos integrantes]  
-**Turma:** FIAP - 2026  
+**Time:** Bruno Gambarini RM561517
+**Turma:** FIAP 2º ano • 2TIAOA • 2026/1  
 **Tutor:** CaiqueFiap-2026  
-**Repositório:** https://github.com/bruno82usa/FIAP/tree/main/SPRINT-1-DASA
+**Repositório:** [https://github.com/bruno82usa/FIAP/tree/main/SPRINT-1-DASA](https://github.com/bruno82usa/FIAP-SPRINT-1-DASA)
