@@ -1,0 +1,218 @@
+{
+  "metadata": {
+    "report_id": "GEN-2024-00387",
+    "laboratory": "Genera by DASA",
+    "report_date": "2024-10-15",
+    "collection_date": "2024-09-28",
+    "analysis_version": "v3.2.1",
+    "patient_consent": true,
+    "data_anonymized": true
+  },
+  "patient_info": {
+    "patient_id": "PAT-2024-001",
+    "age": 42,
+    "biological_sex": "Male",
+    "ancestry_background": "Mixed European",
+    "consent_for_research": true
+  },
+  "genetic_risk_assessment": {
+    "overall_summary": "Moderate genetic risk profile with increased predisposition to metabolic conditions.",
+    "conditions": [
+      {
+        "condition": "Type 2 Diabetes",
+        "risk_category": "Increased Risk",
+        "population_risk": "10%",
+        "patient_risk": "25%",
+        "relative_risk": 2.5,
+        "confidence": 0.89,
+        "associated_genes": ["TCF7L2", "PPARG", "KCNJ11"],
+        "clinical_implications": "Increased likelihood of developing insulin resistance after age 50.",
+        "recommendations": [
+          "Annual fasting glucose test",
+          "Maintain BMI < 25",
+          "150 minutes of aerobic exercise weekly",
+          "Mediterranean diet recommended"
+        ],
+        "references": ["PMID: 24567152", "PMID: 25613900"]
+      },
+      {
+        "condition": "Coronary Artery Disease",
+        "risk_category": "Slightly Increased",
+        "population_risk": "15%",
+        "patient_risk": "20%",
+        "relative_risk": 1.3,
+        "confidence": 0.76,
+        "associated_genes": ["9p21", "LPA", "APOB"],
+        "clinical_implications": "Moderate increase in atherosclerosis risk.",
+        "recommendations": [
+          "Monitor blood pressure regularly",
+          "Annual lipid profile",
+          "Avoid smoking",
+          "Limit saturated fat intake"
+        ]
+      },
+      {
+        "condition": "Alzheimer's Disease (Late Onset)",
+        "risk_category": "Average Risk",
+        "population_risk": "10-15%",
+        "patient_risk": "12%",
+        "relative_risk": 0.8,
+        "confidence": 0.92,
+        "associated_genes": ["APOE ε3/ε3"],
+        "clinical_implications": "Typical risk for age group.",
+        "recommendations": [
+          "Cognitive exercises",
+          "Social engagement",
+          "Mediterranean diet",
+          "Regular physical activity"
+        ]
+      }
+    ]
+  },
+  "carrier_status": {
+    "summary": "Carrier for one autosomal recessive condition.",
+    "conditions": [
+      {
+        "condition": "Cystic Fibrosis",
+        "inheritance": "Autosomal Recessive",
+        "carrier_status": "Carrier",
+        "gene": "CFTR",
+        "variant": "F508del",
+        "carrier_frequency": "1 in 25 (European)",
+        "implications": "25% risk of affected child if partner is also carrier.",
+        "recommendations": [
+          "Partner carrier screening recommended",
+          "Genetic counseling for family planning"
+        ]
+      },
+      {
+        "condition": "Hemochromatosis",
+        "inheritance": "Autosomal Recessive",
+        "carrier_status": "Non-carrier",
+        "gene": "HFE",
+        "variant": "C282Y",
+        "implications": "No increased iron absorption risk."
+      }
+    ]
+  },
+  "ancestry_analysis": {
+    "geographic_regions": [
+      {
+        "region": "Southern Europe",
+        "percentage": 45,
+        "subregions": ["Iberian Peninsula", "Italy", "Greece"]
+      },
+      {
+        "region": "Western Europe",
+        "percentage": 20,
+        "subregions": ["France", "Germany", "United Kingdom"]
+      },
+      {
+        "region": "Native American",
+        "percentage": 15,
+        "subregions": ["Andean", "Amazonian"]
+      },
+      {
+        "region": "West African",
+        "percentage": 12,
+        "subregions": ["Yoruba", "Mende"]
+      },
+      {
+        "region": "East Asian",
+        "percentage": 8,
+        "subregions": ["Chinese", "Japanese"]
+      }
+    ],
+    "neanderthal_variants": 1.8,
+    "population_average": 2.1,
+    "migration_patterns": [
+      "Primary migration from Europe",
+      "Secondary admixture from Americas ~200 years ago",
+      "Minor African ancestry component"
+    ]
+  },
+  "pharmacogenomics": {
+    "summary": "Normal metabolism for most common medications.",
+    "drug_response": [
+      {
+        "drug": "Clopidogrel (Plavix)",
+        "gene": "CYP2C19",
+        "phenotype": "Rapid Metabolizer",
+        "implications": "Standard dose effective",
+        "recommendation": "No dosage adjustment needed"
+      },
+      {
+        "drug": "Warfarin",
+        "gene": "VKORC1, CYP2C9",
+        "phenotype": "Intermediate Sensitivity",
+        "implications": "May require lower maintenance dose",
+        "recommendation": "Monitor INR closely during initiation"
+      },
+      {
+        "drug": "Simvastatin",
+        "gene": "SLC01B1",
+        "phenotype": "Normal Function",
+        "implications": "Standard risk of myopathy",
+        "recommendation": "Standard dosing appropriate"
+      }
+    ]
+  },
+  "wellness_traits": {
+    "categories": [
+      {
+        "category": "Nutrition",
+        "traits": [
+          {
+            "trait": "Lactose Tolerance",
+            "result": "Tolerant",
+            "implications": "Can digest lactose in adulthood",
+            "genes": ["MCM6"]
+          },
+          {
+            "trait": "Caffeine Metabolism",
+            "result": "Fast Metabolizer",
+            "implications": "Quick caffeine clearance, less side effects",
+            "genes": ["CYP1A2"]
+          }
+        ]
+      },
+      {
+        "category": "Fitness",
+        "traits": [
+          {
+            "trait": "Muscle Composition",
+            "result": "Balanced Fast/Slow Twitch",
+            "implications": "Good for both endurance and power sports",
+            "genes": ["ACTN3"]
+          }
+        ]
+      }
+    ]
+  },
+  "raw_data_summary": {
+    "total_variants_analyzed": 650000,
+    "clinically_significant_variants": 12,
+    "carrier_variants": 3,
+    "pharmacogenomic_variants": 8,
+    "wellness_trait_variants": 15,
+    "data_quality": {
+      "coverage": 99.8,
+      "call_rate": 99.5,
+      "contamination_check": "Pass"
+    }
+  },
+  "interpretation_notes": [
+    "Results should be interpreted in clinical context",
+    "Genetic risk is one component of overall health assessment",
+    "Lifestyle factors significantly modify genetic predispositions",
+    "Regular medical follow-up recommended",
+    "Genetic counseling available for complex results"
+  ],
+  "disclaimers": [
+    "This report is for informational purposes only",
+    "Not a substitute for professional medical advice",
+    "Results based on current scientific knowledge",
+    "New discoveries may alter interpretation",
+    "Privacy and confidentiality maintained per HIPAA guidelines"
+  ]
+}
