@@ -217,12 +217,14 @@ curl -X POST http://localhost:8789/ask \
 | `/reports/{id}/summary` | GET | Resumo do relatório |
 
 ## 🎥 Apresentação em Vídeo
+https://youtu.be/iUiRu2i6Yxw
 
-[[Link para vídeo explicativo - a ser adicionado]
-](https://youtu.be/iUiRu2i6Yxw)
 ---
 
 **Time:** Bruno Gambarini RM561517
 **Turma:** FIAP 2º ano • 2TIAOA • 2026/1  
 **Tutor:** CaiqueFiap-2026  
 **Repositório:** [https://github.com/bruno82usa/FIAP/tree/main/SPRINT-1-DASA](https://github.com/bruno82usa/FIAP-SPRINT-1-DASA)
+
+<img width="761" height="1287" alt="Captura_de_tela_20260417_231729" src="https://github.com/user-attachments/assets/dd5e14f5-c0df-4bde-a776-d60de333829a" />
+
