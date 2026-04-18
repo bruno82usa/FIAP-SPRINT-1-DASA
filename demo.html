@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASA Genera AI Assistant - Demonstração</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f9ff;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .tagline {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .card h2 {
+            color: #007bff;
+            margin-top: 0;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        .api-url {
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button.secondary {
+            background-color: #6c757d;
+        }
+        button.secondary:hover {
+            background-color: #545b62;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .response {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .question-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .question-example {
+            background-color: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+        .question-example:hover {
+            background-color: #d0e7ff;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .disclaimer {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DASA Genera AI Assistant</h1>
+        <div class="tagline">Transformando relatórios genéticos complexos em insights compreensíveis</div>
+        <div class="api-url">API Base URL: http://localhost:8789</div>
+        <div id="api-status" class="status"></div>
+    </header>
+
+    <div class="disclaimer">
+        <strong>⚠️ Informação para fins educacionais:</strong> Este sistema demonstra como a IA pode ajudar na interpretação de relatórios genéticos. As respostas são simuladas para demonstração. Consulte sempre um profissional de saúde para orientações médicas.
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>📊 Status da API</h2>
+            <p>Verifique se o servidor está funcionando corretamente:</p>
+            <button onclick="checkHealth()">Verificar Saúde da API</button>
+            <div id="health-response" class="response"></div>
+        </div>
+
+        <div class="card">
+            <h2>📤 Upload de Relatório (Simulado)</h2>
+            <p>Simula o upload de um relatório genético em PDF:</p>
+            <button onclick="uploadPDF()">Simular Upload de PDF</button>
+            <div id="upload-response" class="response"></div>
+            <p><strong>ID do Relatório:</strong> <span id="report-id">(aguardando upload)</span></p>
+        </div>
+
+        <div class="card">
+            <h2>❓ Faça uma Pergunta</h2>
+            <p>Use o ID do relatório acima para fazer perguntas sobre os resultados genéticos:</p>
+            <div class="question-examples">
+                <div class="question-example" onclick="setQuestion('O que significa ser portador?')">O que significa ser portador?</div>
+                <div class="question-example" onclick="setQuestion('Quais são meus principais riscos genéticos?')">Quais são meus principais riscos genéticos?</div>
+                <div class="question-example" onclick="setQuestion('O que devo fazer com base nos meus resultados?')">O que devo fazer com base nos meus resultados?</div>
+                <div class="question-example" onclick="setQuestion('Qual é meu risco para diabetes?')">Qual é meu risco para diabetes?</div>
+            </div>
+            <input type="text" id="report-id-input" placeholder="ID do relatório" value="">
+            <textarea id="question-input" placeholder="Digite sua pergunta sobre o relatório genético..."></textarea>
+            <button onclick="askQuestion()">Perguntar à IA</button>
+            <div id="ask-response" class="response"></div>
+        </div>
+
+        <div class="card">
+            <h2>💡 Recomendações Personalizadas</h2>
+            <p>Obtenha recomendações baseadas no perfil genético:</p>
+            <input type="text" id="rec-report-id" placeholder="ID do relatório" value="">
+            <button onclick="getRecommendations()">Obter Recomendações</button>
+            <div id="recommendations-response" class="response"></div>
+        </div>
+
+        <div class="card">
+            <h2>📋 Resumo do Relatório</h2>
+            <p>Visualize um resumo estruturado do relatório genético:</p>
+            <input type="text" id="summary-report-id" placeholder="ID do relatório" value="">
+            <button onclick="getSummary()">Obter Resumo</button>
+            <div id="summary-response" class="response"></div>
+        </div>
+
+        <div class="card">
+            <h2>🔗 Endpoints da API</h2>
+            <p>Endpoints disponíveis para integração:</p>
+            <div class="api-url">GET /health → Verifica saúde da API</div>
+            <div class="api-url">POST /upload → Upload de PDF (simulado)</div>
+            <div class="api-url">POST /ask → Perguntas sobre relatórios</div>
+            <div class="api-url">GET /recommendations/{id} → Recomendações</div>
+            <div class="api-url">GET /reports/{id}/summary → Resumo do relatório</div>
+            <button class="secondary" onclick="testAllEndpoints()">Testar Todos os Endpoints</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>DASA Genera AI Assistant | Sprint 1 - FIAP Challenge | Arquitetura de Sistemas Avançados</p>
+        <p>API rodando em: <span id="current-url">http://localhost:8789</span></p>
+    </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:8789';
+        let currentReportId = '';
+
+        document.getElementById('current-url').textContent = API_BASE;
+
+        async function checkHealth() {
+            const responseDiv = document.getElementById('health-response');
+            responseDiv.innerHTML = 'Consultando...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                responseDiv.innerHTML = JSON.stringify(data, null, 2);
+                
+                const statusDiv = document.getElementById('api-status');
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '✅ API online e funcionando';
+            } catch (error) {
+                responseDiv.innerHTML = `Erro: ${error.message}`;
+                const statusDiv = document.getElementById('api-status');
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '❌ API offline ou inacessível';
+            }
+        }
+
+        async function uploadPDF() {
+            const responseDiv = document.getElementById('upload-response');
+            responseDiv.innerHTML = 'Simulando upload...';
+            
+            try {
+                const formData = new FormData();
+                const blob = new Blob(['PDF simulado'], { type: 'application/pdf' });
+                formData.append('file', blob, 'relatorio_genera.pdf');
+                
+                const response = await fetch(`${API_BASE}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                responseDiv.innerHTML = JSON.stringify(data, null, 2);
+                
+                currentReportId = data.report_id;
+                document.getElementById('report-id').textContent = currentReportId;
+                document.getElementById('report-id-input').value = currentReportId;
+                document.getElementById('rec-report-id').value = currentReportId;
+                document.getElementById('summary-report-id').value = currentReportId;
+            } catch (error) {
+                responseDiv.innerHTML = `Erro: ${error.message}`;
+            }
+        }
+
+        function setQuestion(question) {
+            document.getElementById('question-input').value = question;
+        }
+
+        async function askQuestion() {
+            const reportId = document.getElementById('report-id-input').value || currentReportId;
+            const question = document.getElementById('question-input').value;
+            
+            if (!reportId) {
+                alert('Por favor, simule um upload primeiro ou insira um ID de relatório');
+                return;
+            }
+            
+            if (!question.trim()) {
+                alert('Por favor, digite uma pergunta');
+                return;
+            }
+            
+            const responseDiv = document.getElementById('ask-response');
+            responseDiv.innerHTML = 'Enviando pergunta...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/ask`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        report_id: reportId,
+                        question: question
+                    })
+                });
+                
+                const data = await response.json();
+                let formattedResponse = `Pergunta: "${question}"\n\n`;
+                formattedResponse += `Resposta: ${data.answer}\n\n`;
+                formattedResponse += `Confiança: ${(data.confidence * 100).toFixed(1)}%\n`;
+                formattedResponse += `Fontes: ${data.sources.join(', ')}\n\n`;
+                formattedResponse += `Aviso: ${data.disclaimer}`;
+                
+                responseDiv.innerHTML = formattedResponse;
+            } catch (error) {
+                responseDiv.innerHTML = `Erro: ${error.message}`;
+            }
+        }
+
+        async function getRecommendations() {
+            const reportId = document.getElementById('rec-report-id').value || currentReportId;
+            
+            if (!reportId) {
+                alert('Por favor, simule um upload primeiro ou insira um ID de relatório');
+                return;
+            }
+            
+            const responseDiv = document.getElementById('recommendations-response');
+            responseDiv.innerHTML = 'Obtendo recomendações...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/recommendations/${reportId}`);
+                const data = await response.json();
+                
+                let formattedResponse = `Recomendações para o relatório ${reportId}:\n\n`;
+                formattedResponse += `Prioridade: ${data.priority}\n`;
+                formattedResponse += `Categorias: ${data.categories.join(', ')}\n\n`;
+                formattedResponse += 'Recomendações específicas:\n';
+                data.recommendations.forEach((rec, index) => {
+                    formattedResponse += `${index + 1}. ${rec}\n`;
+                });
+                
+                responseDiv.innerHTML = formattedResponse;
+            } catch (error) {
+                responseDiv.innerHTML = `Erro: ${error.message}`;
+            }
+        }
+
+        async function getSummary() {
+            const reportId = document.getElementById('summary-report-id').value || currentReportId;
+            
+            if (!reportId) {
+                alert('Por favor, simule um upload primeiro ou insira um ID de relatório');
+                return;
+            }
+            
+            const responseDiv = document.getElementById('summary-response');
+            responseDiv.innerHTML = 'Obtendo resumo...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/reports/${reportId}/summary`);
+                const data = await response.json();
+                responseDiv.innerHTML = JSON.stringify(data, null, 2);
+            } catch (error) {
+                responseDiv.innerHTML = `Erro: ${error.message}`;
+            }
+        }
+
+        async function testAllEndpoints() {
+            await checkHealth();
+            await uploadPDF();
+            
+            if (currentReportId) {
+                document.getElementById('question-input').value = 'Quais são meus principais riscos genéticos?';
+                await askQuestion();
+                await getRecommendations();
+                await getSummary();
+            }
+        }
+
+        window.onload = function() {
+            checkHealth();
+        };
+    </script>
+</body>
+</html>

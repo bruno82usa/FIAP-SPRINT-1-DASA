@@ -1,5 +1,5 @@
 # Core Dependencies
-python>=3.9
+# Python 3.9+ required
 
 # PDF Processing
 pypdf2>=3.0.0

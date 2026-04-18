@@ -154,6 +154,68 @@ graph TD
 └── docs/           # Documentação técnica
 ```
 
+## 🚀 Como Executar a Demonstração
+
+### Pré-requisitos
+- Python 3.9+
+- Docker e Docker Compose (opcional)
+
+### Método 1: API Local + Interface Web
+```bash
+# 1. Criar ambiente virtual (opcional)
+python3 -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# ou .venv\Scripts\activate  # Windows
+
+# 2. Instalar dependências mínimas
+pip install fastapi uvicorn python-multipart pydantic python-dotenv
+
+# 3. Iniciar API na porta 8789
+./start_api.sh
+
+# 4. Em outro terminal, iniciar servidor web na porta 8787
+python3 -m http.server 8787
+
+# 5. Acessar interface web
+# http://localhost:8787/demo.html
+```
+
+### Método 2: Docker Compose (Stack Completa)
+```bash
+# Inicia todos os serviços
+docker-compose up -d
+
+# Serviços disponíveis:
+# - API: http://localhost:8789
+# - Frontend: http://localhost:8788
+# - PostgreSQL: porta 5433
+# - ChromaDB: porta 8002
+# - Redis: porta 6380
+# - Prometheus: porta 9091
+# - Grafana: porta 3002
+```
+
+### Testes Rápidos
+```bash
+# Verificar saúde da API
+curl http://localhost:8789/health
+
+# Fazer pergunta sobre relatório genético
+curl -X POST http://localhost:8789/ask \
+  -H "Content-Type: application/json" \
+  -d '{"report_id":"test","question":"Qual é meu risco para diabetes?"}'
+```
+
+### 📊 Endpoints da API
+| Endpoint | Método | Descrição |
+|----------|--------|-----------|
+| `/` | GET | Mensagem de boas-vindas |
+| `/health` | GET | Status da API |
+| `/upload` | POST | Upload de PDF (simulado) |
+| `/ask` | POST | Perguntas sobre relatórios |
+| `/recommendations/{id}` | GET | Recomendações personalizadas |
+| `/reports/{id}/summary` | GET | Resumo do relatório |
+
 ## 🎥 Apresentação em Vídeo
 
 [Link para vídeo explicativo - a ser adicionado]
@@ -161,5 +223,6 @@ graph TD
 ---
 
 **Time:** [Nomes dos integrantes]  
-**Turma:** [FIAP - 2026]  
-**Tutor:** CaiqueFiap-2026
+**Turma:** FIAP - 2026  
+**Tutor:** CaiqueFiap-2026  
+**Repositório:** https://github.com/bruno82usa/FIAP/tree/main/SPRINT-1-DASA
